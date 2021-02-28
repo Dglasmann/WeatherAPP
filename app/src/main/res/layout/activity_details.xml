@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".detail.DetailActivity">
+
+    <TextView
+        android:id="@+id/name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        android:textColor="#388E3C"
+        tools:text="Novosibirsk"
+        android:fontFamily="@font/manrope_bold"/>
+
+    <TextView
+        android:id="@+id/temperature_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textSize="18sp"
+        android:textColor="#388E3C"
+        tools:text="Temperature: 0"
+        android:fontFamily="@font/manrope_bold"/>
+
+    <TextView
+        android:id="@+id/fallout_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textSize="18sp"
+        android:textColor="#388E3C"
+        tools:text="Fallout: Sunny"
+        android:fontFamily="@font/manrope_bold"/>
+
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="@string/back_button"
+        android:theme="@style/AppTheme"
+        />
+
+</LinearLayout>

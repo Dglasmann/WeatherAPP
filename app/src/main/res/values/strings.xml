@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Weather App!</string>
+    <string name="back_button">Back!</string>
+    <string name="city_format">City: %1$s</string>
+    <string name="temperature_format">Temperature: %1$s</string>
+    <string name="fallout_format">Fallout: %1$s</string>
+</resources>
