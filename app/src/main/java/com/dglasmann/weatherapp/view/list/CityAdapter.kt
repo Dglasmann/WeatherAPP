@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.dglasmann.weatherapp.City
+import com.dglasmann.weatherapp.model.City
 import com.dglasmann.weatherapp.R
 
 class CityAdapter(private val onItemClick: (City) -> Unit) :RecyclerView.Adapter<CityAdapter.CityHolder>() {
