@@ -1,3 +1,3 @@
-package com.dglasmann.weatherapp
+package com.dglasmann.weatherapp.presenter
 
 interface BaseView

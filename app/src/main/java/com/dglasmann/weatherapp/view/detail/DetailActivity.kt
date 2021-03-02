@@ -1,4 +1,4 @@
-package com.dglasmann.weatherapp.detail
+package com.dglasmann.weatherapp.view.detail
 
 import android.content.Context
 import android.content.Intent

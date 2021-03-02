@@ -1,11 +1,11 @@
-package com.dglasmann.weatherapp
+package com.dglasmann.weatherapp.view.list
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.dglasmann.weatherapp.list.ListActivity
+import com.dglasmann.weatherapp.R
 
 class Splash : AppCompatActivity() {
 

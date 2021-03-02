@@ -1,4 +1,4 @@
-package com.dglasmann.weatherapp
+package com.dglasmann.weatherapp.model
 
 import android.app.Application
 

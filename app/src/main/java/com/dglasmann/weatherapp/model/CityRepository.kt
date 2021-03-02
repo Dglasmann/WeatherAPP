@@ -1,4 +1,4 @@
-package com.dglasmann.weatherapp
+package com.dglasmann.weatherapp.model
 
 class CityRepository {
     private val cities = mutableListOf(

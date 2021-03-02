@@ -1,4 +1,4 @@
-package com.dglasmann.weatherapp.list
+package com.dglasmann.weatherapp.view.list
 
 import android.view.LayoutInflater
 import android.view.View

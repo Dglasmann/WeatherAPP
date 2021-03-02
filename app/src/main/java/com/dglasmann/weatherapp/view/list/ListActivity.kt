@@ -1,4 +1,4 @@
-package com.dglasmann.weatherapp.list
+package com.dglasmann.weatherapp.view.list
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dglasmann.weatherapp.presenter.ListPresenter
 import com.dglasmann.weatherapp.model.CityApplication
 import com.dglasmann.weatherapp.R
-import com.dglasmann.weatherapp.detail.DetailActivity
+import com.dglasmann.weatherapp.view.detail.DetailActivity
 import com.dglasmann.weatherapp.model.City
 
 class ListActivity: AppCompatActivity(), ListView {

@@ -1,5 +1,6 @@
-package com.dglasmann.weatherapp
+package com.dglasmann.weatherapp.presenter
 
+import com.dglasmann.weatherapp.view.detail.DetailView
 import com.dglasmann.weatherapp.model.CityRepository
 
 

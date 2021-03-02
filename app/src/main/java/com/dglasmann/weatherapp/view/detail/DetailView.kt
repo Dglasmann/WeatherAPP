@@ -1,4 +1,4 @@
-package com.dglasmann.weatherapp.detail
+package com.dglasmann.weatherapp.view.detail
 
 import com.dglasmann.weatherapp.presenter.BaseView
 import com.dglasmann.weatherapp.model.City
