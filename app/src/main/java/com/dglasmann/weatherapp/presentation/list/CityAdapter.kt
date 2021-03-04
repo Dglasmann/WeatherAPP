@@ -1,11 +1,11 @@
-package com.dglasmann.weatherapp.view.list
+package com.dglasmann.weatherapp.presentation.list
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.dglasmann.weatherapp.model.City
+import com.dglasmann.weatherapp.domain.City
 import com.dglasmann.weatherapp.R
 
 class CityAdapter(private val onItemClick: (City) -> Unit) :RecyclerView.Adapter<CityAdapter.CityHolder>() {

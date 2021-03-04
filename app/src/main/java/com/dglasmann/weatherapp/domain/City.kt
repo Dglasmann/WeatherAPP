@@ -1,4 +1,4 @@
-package com.dglasmann.weatherapp.model
+package com.dglasmann.weatherapp.domain
 
 data class City (
     val id: Long,

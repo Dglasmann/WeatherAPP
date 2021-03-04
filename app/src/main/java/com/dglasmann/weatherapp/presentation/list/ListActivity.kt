@@ -1,19 +1,17 @@
-package com.dglasmann.weatherapp.view.list
+package com.dglasmann.weatherapp.presentation.list
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dglasmann.weatherapp.presenter.ListPresenter
-import com.dglasmann.weatherapp.model.CityApplication
 import com.dglasmann.weatherapp.R
-import com.dglasmann.weatherapp.view.detail.DetailActivity
-import com.dglasmann.weatherapp.model.City
+import com.dglasmann.weatherapp.presentation.details.DetailActivity
+import com.dglasmann.weatherapp.domain.City
 
 class ListActivity: AppCompatActivity(), ListView {
 
         private val presenter by lazy {
-                ListPresenter((application as CityApplication).cityRepository)
+                ListPresenterFactory.getPresenter()
         }
 
         private val adapter by lazy {  CityAdapter(presenter::onCityClicked) }

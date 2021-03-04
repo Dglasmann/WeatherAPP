@@ -1,14 +1,12 @@
-package com.dglasmann.weatherapp.view.detail
+package com.dglasmann.weatherapp.presentation.details
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.dglasmann.weatherapp.presenter.DetailPresenter
-import com.dglasmann.weatherapp.model.CityApplication
 import com.dglasmann.weatherapp.R
-import com.dglasmann.weatherapp.model.City
+import com.dglasmann.weatherapp.domain.City
 
 class DetailActivity : AppCompatActivity(), DetailView {
 companion object {
@@ -21,8 +19,7 @@ private const val EXTRA_ID = "EXTRA_ID"
     }
 }
     private val presenter by lazy {
-        DetailPresenter((application as CityApplication).cityRepository,
-                intent.getLongExtra(EXTRA_ID, 0))
+        DetailsPresenterFactory.getPresenter(intent.getLongExtra(EXTRA_ID, 0    ))
     }
     lateinit var nameText:TextView
     lateinit var temperatureText:TextView
@@ -34,13 +31,6 @@ private const val EXTRA_ID = "EXTRA_ID"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
-        nameText = findViewById(R.id.name_text)
-        temperatureText = findViewById(R.id.temperature_text)
-        falloutText = findViewById(R.id.fallout_text)
-        backbtn = findViewById(R.id.back_button)
-        backbtn.setOnClickListener{
-            finish()
-        }
         initCity()
         presenter.attachView(this)
     }

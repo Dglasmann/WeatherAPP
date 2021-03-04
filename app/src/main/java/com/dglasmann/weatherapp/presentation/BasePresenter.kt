@@ -1,4 +1,4 @@
-package com.dglasmann.weatherapp.presenter
+package com.dglasmann.weatherapp.presentation
 
 open class BasePresenter<View: BaseView> {
     var view: View? = null
