@@ -5,10 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.dglasmann.weatherapp.domain.City
+import com.dglasmann.weatherapp.domain.model.City
 import com.dglasmann.weatherapp.R
+import com.dglasmann.weatherapp.databinding.ItemCityBinding
+import com.squareup.picasso.Picasso
 
-class CityAdapter(private val onItemClick: (City) -> Unit) :RecyclerView.Adapter<CityAdapter.CityHolder>() {
+class CityAdapter(private val onClick: (City) -> Unit) : RecyclerView.Adapter<CityHolder>() {
 
     var cities: List<City> = emptyList()
         set(value) {
@@ -17,27 +19,32 @@ class CityAdapter(private val onItemClick: (City) -> Unit) :RecyclerView.Adapter
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_city, parent, false)
-        return CityHolder(view, onItemClick)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val itemViewBinding = ItemCityBinding.inflate(layoutInflater, parent, false)
+        return CityHolder(itemViewBinding, onClick)
     }
 
     override fun onBindViewHolder(holder: CityHolder, position: Int) {
-        val city = cities[position]
-        holder.bind(city)
-    }
-
-    class CityHolder(itemView: View, val onItemClick: (City) -> Unit) :
-        RecyclerView.ViewHolder(itemView) {
-
-        private val nameText = itemView.findViewById<TextView>(R.id.name_text)
-        private val temperatureText = itemView.findViewById<TextView>(R.id.temperature_text)
-
-        fun bind(city: City) {
-            nameText.text = itemView.context.getString(R.string.city_format, city.name)
-            temperatureText.text = city.temperature
-            itemView.setOnClickListener { onItemClick(city) }
-        }
+        val person = cities[position]
+        holder.bind(person)
     }
 
     override fun getItemCount(): Int = cities.count()
+}
+
+class CityHolder(
+    private val itemViewBinding: ItemCityBinding,
+    private val onClick: (City) -> Unit
+) : RecyclerView.ViewHolder(itemViewBinding.root) {
+
+    fun bind(city: City) {
+        itemViewBinding.cityText.text = city.name
+        itemViewBinding.temperatureText.text = itemView.context.getString(
+            R.string.temperature_format,
+            (city.main.temp - 273).toInt().toString()
+        )
+        val url = "http://openweathermap.org/img/wn/${city.weather[0].icon}@2x.png"
+        Picasso.with(itemView.context).load(url).resize(128, 128).into(itemViewBinding.condPng)
+        itemView.setOnClickListener { onClick(city) }
+    }
 }

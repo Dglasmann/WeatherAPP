@@ -5,47 +5,53 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.dglasmann.weatherapp.R
-import com.dglasmann.weatherapp.domain.City
+import com.dglasmann.weatherapp.databinding.ActivityDetailsBinding
+import com.dglasmann.weatherapp.domain.model.City
+import com.squareup.picasso.Picasso
 
 class DetailActivity : AppCompatActivity(), DetailView {
-companion object {
-private const val EXTRA_ID = "EXTRA_ID"
 
-    fun start(context: Context, id: Long) {
-        val intent = Intent(context, DetailActivity::class.java)
-        intent.putExtra(EXTRA_ID, id)
-        context.startActivity(intent)
+    companion object {
+
+        private const val EXTRA_NAME = "EXTRA_NAME"
+
+        fun start(context: Context, name: String) {
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra(EXTRA_NAME, name)
+            context.startActivity(intent)
+        }
     }
-}
+
     private val presenter by lazy {
-        DetailsPresenterFactory.getPresenter(intent.getLongExtra(EXTRA_ID, 0    ))
+        DetailPresenterFactory.getPresenter(intent.getStringExtra(EXTRA_NAME) ?: "Unknown")
     }
-    lateinit var nameText:TextView
-    lateinit var temperatureText:TextView
-    lateinit var falloutText:TextView
-    lateinit var backbtn:TextView
 
-
+    private lateinit var activityDetailBinding: ActivityDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)
-        initCity()
+        activityDetailBinding = ActivityDetailsBinding.inflate(layoutInflater)
+        setContentView(activityDetailBinding.root)
+
+        presenter.loading.observe(this) {
+            activityDetailBinding.content.isVisible = !it
+            activityDetailBinding.progressCircular.isVisible = it
+        }
         presenter.attachView(this)
-    }
-    private fun initCity() {
-        nameText = findViewById(R.id.name_text)
-        temperatureText = findViewById(R.id.temperature_text)
-        falloutText = findViewById(R.id.fallout_text)
-        backbtn = findViewById(R.id.back_button)
     }
 
     override fun bindCity(city: City) {
-        nameText.text = getString(R.string.city_format, city.name)
-        temperatureText.text = getString(R.string.temperature_format, city.temperature)
-        falloutText.text = getString(R.string.fallout_format, city.fallout)
-        backbtn.setOnClickListener {
+        activityDetailBinding.cityNameText.text = city.name
+        activityDetailBinding.cityTemperatureText.text =
+            getString(R.string.temperature_format, (city.main.temp - 273).toInt().toString())
+        activityDetailBinding.cityCountryText.text = city.sys.country
+        activityDetailBinding.cityFalloutText.text =
+            getString(R.string.fallout_format, city.weather[0].description)
+        val url = "http://openweathermap.org/img/wn/${city.weather[0].icon}@2x.png"
+        Picasso.with(this).load(url).resize(128, 128).into(activityDetailBinding.weatherPng)
+        activityDetailBinding.backButton.setOnClickListener {
             presenter.getBack()
         }
     }
