@@ -9,7 +9,7 @@ import io.reactivex.schedulers.Schedulers
 
 class ListPresenter(private val getCitiesUseCase: GetCitiesUseCase) : BasePresenter<ListView>() {
 
-    val cityList = MutableLiveData<List<City>>()
+    private val cityList = MutableLiveData<List<City>>()
     val loading = MutableLiveData<Boolean>()
 
     fun onViewResumed() {

@@ -17,50 +17,33 @@ class ListActivity : AppCompatActivity(), ListView {
         private val presenter by lazy {
                 ListPresenterFactory.getPresenter()
         }
-        private lateinit var cityList: RecyclerView
-        private lateinit var swipeRefresh: SwipeRefreshLayout
+        private lateinit var swipeRefreshLayout: SwipeRefreshLayout
         private lateinit var activityMainBinding: ActivityMainBinding
         private val adapter = CityAdapter {
                 presenter.onCityClicked(it)
         }
 
-        private val swipeHelper = object : ItemTouchHelper.SimpleCallback(
-                0,
-                ItemTouchHelper.LEFT
-        ) {
-                override fun onMove(
-                        recyclerView: RecyclerView,
-                        viewHolder: RecyclerView.ViewHolder,
-                        target: RecyclerView.ViewHolder
-                ): Boolean {
-                        return false
-                }
-
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
-                        val position = viewHolder.adapterPosition
-                }
-        }
         override fun onCreate(savedInstanceState: Bundle?) {
                 super.onCreate(savedInstanceState)
-                swipeRefresh = findViewById(R.id.swipeRefresh)
                 activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
                 setContentView(activityMainBinding.root)
+                swipeRefreshLayout = findViewById(R.id.swipeRefresh)
+                swipeRefreshLayout.setOnRefreshListener {
+                        presenter.onViewResumed()
+                        swipeRefreshLayout.isRefreshing = false
+                }
                 presenter.attachView(this)
                 initViews()
                 presenter.loading.observe(this) {
                         activityMainBinding.cityList.isVisible = !it
-                        swipeRefresh.isRefreshing = it
-                }
-
-                ItemTouchHelper(swipeHelper).attachToRecyclerView(cityList)
-                swipeRefresh.setOnRefreshListener {
-                        presenter.onViewResumed()
+                        activityMainBinding.progressCircularList.isVisible = it
                 }
         }
 
         private fun initViews() {
                 activityMainBinding.cityList.adapter = adapter
                 activityMainBinding.cityList.layoutManager = LinearLayoutManager(this)
+
         }
 
         override fun onResume() {

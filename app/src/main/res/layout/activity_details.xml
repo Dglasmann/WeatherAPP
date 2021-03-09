@@ -9,9 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/blue"
+        android:background="@color/green_700"
         android:id="@+id/content"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:context=".presentation.details.DetailsActivity">
 
         <TextView
@@ -50,7 +50,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/city_fallout_text"
                 android:textSize="70sp"
-                tools:text="-7" />
+                tools:text="-100" />
 
             <TextView
                 android:id="@+id/city_fallout_text"
@@ -70,22 +70,20 @@
                 android:id="@+id/weatherPng"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/city_fallout_text"
-                app:layout_constraintTop_toBottomOf="@id/temperaturePng"
                 app:layout_constraintBottom_toBottomOf="parent"
-                />
+                app:layout_constraintEnd_toStartOf="@id/city_fallout_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temperaturePng" />
 
             <ImageView
                 android:id="@+id/temperaturePng"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/thermometer_lines"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/city_temperature_text"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="67dp"
+                android:layout_height="65dp"
+                android:src="@drawable/ic_thermometer_lines_black_48dp"
                 app:layout_constraintBottom_toTopOf="@id/weatherPng"
-                />
+                app:layout_constraintEnd_toStartOf="@id/city_temperature_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
